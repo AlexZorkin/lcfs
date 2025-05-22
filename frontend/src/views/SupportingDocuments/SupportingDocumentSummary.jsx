@@ -2,6 +2,7 @@ import Box from '@mui/material/Box'
 import { List, ListItemButton } from '@mui/material'
 import BCTypography from '@/components/BCTypography'
 import { useDownloadDocument } from '@/hooks/useDocuments.js'
+import { timezoneFormatter } from '@/utils/formatters'
 
 export const SupportingDocumentSummary = ({ parentID, parentType, data }) => {
   const downloadDocument = useDownloadDocument(parentType, parentID)
@@ -26,7 +27,8 @@ export const SupportingDocumentSummary = ({ parentID, parentType, data }) => {
               variant="subtitle2"
               color="link"
             >
-              {file.fileName}
+              {file.fileName} - {timezoneFormatter({ value: file.createDate })}
+              {file.createUser ? ` - ${file.createUser}` : ''}
             </BCTypography>
           </ListItemButton>
         ))}
